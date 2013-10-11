@@ -1,0 +1,58 @@
+-provide(:title, 'Events')
+.new_event_form.auto_size_modal.modal.hide.fade
+  = render :partial => "events/new", :locals => {}
+
+.section-header
+  %h1.center Events
+  %hr
+
+= ssp_search_form Event, 
+  [{ :name => :account, :as => :string, :wildcard => :both },
+  { :name => :vendor, :as => :string, :wildcard => :both },]
+  
+.create-buttons
+  %a.btn.btn-small.btn-success.toggle-modal{"data-target"=>".new_event_form"}
+    %i.icon.icon-plus-sign.icon-white{"data-target"=>".new_event_form"}
+    Event
+
+.results
+  %table.table.table-striped.table-condensed
+    %thead
+      %tr
+        %th Event ID
+        %th= ssp_sort_link :date
+        %th= ssp_sort_link :event_time
+        %th Contact
+        %th= ssp_sort_link :product
+        %th= ssp_sort_link :account
+        %th Location
+        %th Vendor(s)
+        %th= ssp_sort_link :status
+        %th 
+    %tbody
+      = paginate @events, :theme => 'twitter-bootstrap'
+      - @events.each do |event|
+        %tr
+          %td= link_to event.pretty_id, event_path(event)
+          %td= event.event_start_time.nil? ? '?' : event.event_start_time.strftime("%Y-%m-%d")
+          %td
+            = event.event_start_time.strftime("%I:%M:%S %p") unless event.event_start_time.nil?
+            = ' - ' + event.event_end_time.strftime("%I:%M:%S %p") unless event.event_end_time.nil?
+          %td= event.contact
+          %td= event.product.titleize
+          %td= link_to event.account.name, account_path(event.account)
+          %td= event.location.html_address unless event.location.nil?
+          %td= raw event.event_vendors.map {|a| link_to a.vendor.name, vendor_path(a.vendor)}.join(", ")
+          %td= event.status.titleize
+          %td
+            -if event.can_destroy?
+              %a.btn.btn.btn-small.btn-danger{:href=>event_path(event), :"data-method" => "delete", data: { confirm: 'Are you sure?' }}
+                %i.icon.icon-remove.icon-white
+            -else 
+              %a.btn.btn.btn-small.disabled
+                %i.icon.icon-remove.icon-white
+
+  = paginate @events, :theme => 'twitter-bootstrap'
+
+
+

@@ -1,0 +1,45 @@
+- if li.payable_party == party && (li.line_item_sub_type != "Menu-Item" || include_menu_items)
+  %tr{"data-record-id"=>li.id}
+    %td{:nowrap => ""}= li.line_item_type
+    %td{:nowrap => ""}= li.line_item_sub_type
+    %td{:nowrap => ""}= li.sku
+    - if li.include_price_in_expense
+      %td= li.name
+    - else
+      %td{:style => "padding-left:50px"}= li.name
+    %td= li.inventory_item.meal_type.titleize unless !defined?(li.inventory_item.meal_type)
+    %td= li.notes
+    %td= (li.quantity == 0)  ? "-" : li.quantity
+    %td= (li.include_price_in_expense) ? number_to_currency(li.unit_price_expense) : "-"
+    %td= (li.include_price_in_expense) ? number_to_currency(li.expense_total) : "-"
+    %td= (!li.include_price_in_expense) ? "-" : number_with_precision(li.expense_tax_rate * 100, precision: 2)
+    %td
+      - if li.document.nil?
+        .btn-group
+          %a.btn.btn-mini.toggle-modal{"data-target"=>"#edit_line_item_form_" + li.id.to_s}
+            %i.icon.icon-edit.toggle-modal{"data-target"=>"#edit_line_item_form_" + li.id.to_s}
+          %a.btn.btn-mini.btn-danger{:href=>event_line_item_path(@event, li), :"data-method" => "delete", data: { confirm: 'Are you sure?' }}
+            %i.icon.icon-white.icon-remove
+
+- if li.billable_party == party && (li.line_item_sub_type != "Menu-Item" || include_menu_items)
+  %tr{"data-record-id"=>li.id}
+    %td{:nowrap => ""}= li.line_item_type
+    %td{:nowrap => ""}= li.line_item_sub_type
+    %td{:nowrap => ""}= li.sku
+    - if li.include_price_in_revenue
+      %td= li.name
+    - else
+      %td{:style => "padding-left:50px"}= li.name
+    %td= li.inventory_item.meal_type.titleize unless !defined?(li.inventory_item.meal_type)
+    %td= li.notes
+    %td= (li.quantity == 0)  ? "-" : li.quantity
+    %td= (li.include_price_in_revenue) ? number_to_currency(-li.unit_price_revenue) : "-"
+    %td= (li.include_price_in_revenue) ? number_to_currency(-li.revenue_total) : "-"
+    %td= (!li.include_price_in_revenue) ? "-" : number_with_precision(li.revenue_tax_rate * 100, precision: 2)
+    %td
+      - if li.document.nil?
+        .btn-group
+          %a.btn.btn-mini.toggle-modal{"data-target"=>"#edit_line_item_form_" + li.id.to_s}
+            %i.icon.icon-edit.toggle-modal{"data-target"=>"#edit_line_item_form_" + li.id.to_s}
+          %a.btn.btn-mini.btn-danger{:href=>event_line_item_path(@event, li), :"data-method" => "delete", data: { confirm: 'Are you sure?' }}
+            %i.icon.icon-white.icon-remove

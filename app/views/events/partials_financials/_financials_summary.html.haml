@@ -1,0 +1,18 @@
+%h2 Event Financial Summary
+
+- revenue = @event.catering_revenue
+- cogs = @event.catering_cogs
+
+%table.table.table-condensed.table-bordered.table-striped
+  %tr
+    %td Revenue:
+    %td= number_to_currency(revenue)
+    %td
+  %tr
+    %td COGS:
+    %td= number_to_currency(cogs)
+    %td
+  %tr
+    %td Total GP:
+    %td= number_to_currency(revenue - cogs)
+    %td= (revenue == 0 ? '0' : number_with_precision((revenue - cogs)/revenue * 100, precision: 0)) + '%'

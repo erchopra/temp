@@ -1,0 +1,121 @@
+# Logfile created on 2013-08-12 15:27:16 +0530 by logger.rb/31641
+[08/12/13 15:27:16 +0530 enbake-System-Product-Name (10122)] INFO : Starting the New Relic agent in "development" environment.
+[08/12/13 15:27:16 +0530 enbake-System-Product-Name (10122)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "development" section of your newrelic.yml.
+[08/12/13 15:27:16 +0530 enbake-System-Product-Name (10122)] INFO : Reading configuration from config/newrelic.yml
+[08/12/13 15:27:16 +0530 enbake-System-Product-Name (10122)] INFO : Environment: development
+[08/12/13 15:27:16 +0530 enbake-System-Product-Name (10122)] INFO : No known dispatcher detected.
+[08/12/13 15:27:16 +0530 enbake-System-Product-Name (10122)] INFO : Application: SnapPea (Production)
+[08/12/13 15:27:16 +0530 enbake-System-Product-Name (10122)] WARN : Agent configured not to send data in this environment.
+[08/12/13 15:27:16 +0530 enbake-System-Product-Name (10122)] INFO : Installing Net instrumentation
+[08/12/13 15:27:16 +0530 enbake-System-Product-Name (10122)] INFO : Installing Sinatra instrumentation
+[08/12/13 15:27:16 +0530 enbake-System-Product-Name (10122)] INFO : Installing Resque instrumentation
+[08/12/13 15:27:16 +0530 enbake-System-Product-Name (10122)] INFO : Installing ActiveRecord instrumentation
+[08/12/13 15:27:16 +0530 enbake-System-Product-Name (10122)] INFO : Installing Rails 3 Controller instrumentation
+[08/12/13 15:27:16 +0530 enbake-System-Product-Name (10122)] INFO : Installing Rails 3.1/3.2 view instrumentation
+[08/12/13 15:27:17 +0530 enbake-System-Product-Name (10122)] INFO : Installing Rails3 Error instrumentation
+[08/12/13 15:27:17 +0530 enbake-System-Product-Name (10122)] INFO : Finished instrumentation
+[08/12/13 15:28:27 +0530 enbake-System-Product-Name (10150)] INFO : Starting the New Relic agent in "development" environment.
+[08/12/13 15:28:27 +0530 enbake-System-Product-Name (10150)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "development" section of your newrelic.yml.
+[08/12/13 15:28:27 +0530 enbake-System-Product-Name (10150)] INFO : Reading configuration from config/newrelic.yml
+[08/12/13 15:28:27 +0530 enbake-System-Product-Name (10150)] INFO : Environment: development
+[08/12/13 15:28:27 +0530 enbake-System-Product-Name (10150)] INFO : Dispatcher: webrick
+[08/12/13 15:28:27 +0530 enbake-System-Product-Name (10150)] INFO : Application: SnapPea (Production)
+[08/12/13 15:28:27 +0530 enbake-System-Product-Name (10150)] WARN : Agent configured not to send data in this environment.
+[08/12/13 15:28:28 +0530 enbake-System-Product-Name (10150)] INFO : Installing Net instrumentation
+[08/12/13 15:28:28 +0530 enbake-System-Product-Name (10150)] INFO : Installing Sinatra instrumentation
+[08/12/13 15:28:28 +0530 enbake-System-Product-Name (10150)] INFO : Installing Resque instrumentation
+[08/12/13 15:28:28 +0530 enbake-System-Product-Name (10150)] INFO : Installing ActiveRecord instrumentation
+[08/12/13 15:28:28 +0530 enbake-System-Product-Name (10150)] INFO : Installing Rails 3 Controller instrumentation
+[08/12/13 15:28:28 +0530 enbake-System-Product-Name (10150)] INFO : Installing Rails 3.1/3.2 view instrumentation
+[08/12/13 15:28:28 +0530 enbake-System-Product-Name (10150)] INFO : Installing Rails3 Error instrumentation
+[08/12/13 15:28:28 +0530 enbake-System-Product-Name (10150)] INFO : Finished instrumentation
+[08/12/13 15:36:09 +0530 enbake-System-Product-Name (10616)] INFO : Starting the New Relic agent in "development" environment.
+[08/12/13 15:36:09 +0530 enbake-System-Product-Name (10616)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "development" section of your newrelic.yml.
+[08/12/13 15:36:09 +0530 enbake-System-Product-Name (10616)] INFO : Reading configuration from config/newrelic.yml
+[08/12/13 15:36:09 +0530 enbake-System-Product-Name (10616)] INFO : Environment: development
+[08/12/13 15:36:09 +0530 enbake-System-Product-Name (10616)] INFO : Dispatcher: webrick
+[08/12/13 15:36:09 +0530 enbake-System-Product-Name (10616)] INFO : Application: SnapPea (Production)
+[08/12/13 15:36:09 +0530 enbake-System-Product-Name (10616)] WARN : Agent configured not to send data in this environment.
+[08/12/13 15:36:10 +0530 enbake-System-Product-Name (10616)] INFO : Installing Net instrumentation
+[08/12/13 15:36:10 +0530 enbake-System-Product-Name (10616)] INFO : Installing Sinatra instrumentation
+[08/12/13 15:36:10 +0530 enbake-System-Product-Name (10616)] INFO : Installing Resque instrumentation
+[08/12/13 15:36:10 +0530 enbake-System-Product-Name (10616)] INFO : Installing ActiveRecord instrumentation
+[08/12/13 15:36:10 +0530 enbake-System-Product-Name (10616)] INFO : Installing Rails 3 Controller instrumentation
+[08/12/13 15:36:10 +0530 enbake-System-Product-Name (10616)] INFO : Installing Rails 3.1/3.2 view instrumentation
+[08/12/13 15:36:10 +0530 enbake-System-Product-Name (10616)] INFO : Installing Rails3 Error instrumentation
+[08/12/13 15:36:10 +0530 enbake-System-Product-Name (10616)] INFO : Finished instrumentation
+[08/12/13 16:35:09 +0530 enbake-System-Product-Name (12634)] INFO : Starting the New Relic agent in "development" environment.
+[08/12/13 16:35:09 +0530 enbake-System-Product-Name (12634)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "development" section of your newrelic.yml.
+[08/12/13 16:35:09 +0530 enbake-System-Product-Name (12634)] INFO : Reading configuration from config/newrelic.yml
+[08/12/13 16:35:10 +0530 enbake-System-Product-Name (12634)] INFO : Environment: development
+[08/12/13 16:35:10 +0530 enbake-System-Product-Name (12634)] INFO : No known dispatcher detected.
+[08/12/13 16:35:10 +0530 enbake-System-Product-Name (12634)] INFO : Application: SnapPea (Production)
+[08/12/13 16:35:10 +0530 enbake-System-Product-Name (12634)] WARN : Agent configured not to send data in this environment.
+[08/12/13 16:35:10 +0530 enbake-System-Product-Name (12634)] INFO : Installing Net instrumentation
+[08/12/13 16:35:10 +0530 enbake-System-Product-Name (12634)] INFO : Installing Sinatra instrumentation
+[08/12/13 16:35:10 +0530 enbake-System-Product-Name (12634)] INFO : Installing Resque instrumentation
+[08/12/13 16:35:10 +0530 enbake-System-Product-Name (12634)] INFO : Installing ActiveRecord instrumentation
+[08/12/13 16:35:10 +0530 enbake-System-Product-Name (12634)] INFO : Installing Rails 3 Controller instrumentation
+[08/12/13 16:35:10 +0530 enbake-System-Product-Name (12634)] INFO : Installing Rails 3.1/3.2 view instrumentation
+[08/12/13 16:35:10 +0530 enbake-System-Product-Name (12634)] INFO : Installing Rails3 Error instrumentation
+[08/12/13 16:35:10 +0530 enbake-System-Product-Name (12634)] INFO : Finished instrumentation
+[08/12/13 16:35:53 +0530 enbake-System-Product-Name (12651)] INFO : Starting the New Relic agent in "development" environment.
+[08/12/13 16:35:53 +0530 enbake-System-Product-Name (12651)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "development" section of your newrelic.yml.
+[08/12/13 16:35:53 +0530 enbake-System-Product-Name (12651)] INFO : Reading configuration from config/newrelic.yml
+[08/12/13 16:35:53 +0530 enbake-System-Product-Name (12651)] INFO : Environment: development
+[08/12/13 16:35:53 +0530 enbake-System-Product-Name (12651)] INFO : Dispatcher: webrick
+[08/12/13 16:35:53 +0530 enbake-System-Product-Name (12651)] INFO : Application: SnapPea (Production)
+[08/12/13 16:35:53 +0530 enbake-System-Product-Name (12651)] WARN : Agent configured not to send data in this environment.
+[08/12/13 16:35:53 +0530 enbake-System-Product-Name (12651)] INFO : Installing Net instrumentation
+[08/12/13 16:35:53 +0530 enbake-System-Product-Name (12651)] INFO : Installing Sinatra instrumentation
+[08/12/13 16:35:53 +0530 enbake-System-Product-Name (12651)] INFO : Installing Resque instrumentation
+[08/12/13 16:35:53 +0530 enbake-System-Product-Name (12651)] INFO : Installing ActiveRecord instrumentation
+[08/12/13 16:35:53 +0530 enbake-System-Product-Name (12651)] INFO : Installing Rails 3 Controller instrumentation
+[08/12/13 16:35:53 +0530 enbake-System-Product-Name (12651)] INFO : Installing Rails 3.1/3.2 view instrumentation
+[08/12/13 16:35:54 +0530 enbake-System-Product-Name (12651)] INFO : Installing Rails3 Error instrumentation
+[08/12/13 16:35:54 +0530 enbake-System-Product-Name (12651)] INFO : Finished instrumentation
+[08/12/13 16:48:28 +0530 enbake-System-Product-Name (12852)] INFO : Starting the New Relic agent in "development" environment.
+[08/12/13 16:48:28 +0530 enbake-System-Product-Name (12852)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "development" section of your newrelic.yml.
+[08/12/13 16:48:28 +0530 enbake-System-Product-Name (12852)] INFO : Reading configuration from config/newrelic.yml
+[08/12/13 16:48:28 +0530 enbake-System-Product-Name (12852)] INFO : Environment: development
+[08/12/13 16:48:28 +0530 enbake-System-Product-Name (12852)] INFO : No known dispatcher detected.
+[08/12/13 16:48:28 +0530 enbake-System-Product-Name (12852)] INFO : Application: SnapPea (Production)
+[08/12/13 16:48:28 +0530 enbake-System-Product-Name (12852)] WARN : Agent configured not to send data in this environment.
+[08/12/13 16:48:28 +0530 enbake-System-Product-Name (12852)] INFO : Installing Net instrumentation
+[08/12/13 16:48:28 +0530 enbake-System-Product-Name (12852)] INFO : Installing Sinatra instrumentation
+[08/12/13 16:48:28 +0530 enbake-System-Product-Name (12852)] INFO : Installing Resque instrumentation
+[08/12/13 16:48:28 +0530 enbake-System-Product-Name (12852)] INFO : Installing ActiveRecord instrumentation
+[08/12/13 16:48:28 +0530 enbake-System-Product-Name (12852)] INFO : Installing Rails 3 Controller instrumentation
+[08/12/13 16:48:28 +0530 enbake-System-Product-Name (12852)] INFO : Installing Rails 3.1/3.2 view instrumentation
+[08/12/13 16:48:29 +0530 enbake-System-Product-Name (12852)] INFO : Installing Rails3 Error instrumentation
+[08/12/13 16:48:29 +0530 enbake-System-Product-Name (12852)] INFO : Finished instrumentation
+[08/12/13 16:49:39 +0530 enbake-System-Product-Name (12877)] INFO : Starting the New Relic agent in "development" environment.
+[08/12/13 16:49:39 +0530 enbake-System-Product-Name (12877)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "development" section of your newrelic.yml.
+[08/12/13 16:49:39 +0530 enbake-System-Product-Name (12877)] INFO : Reading configuration from config/newrelic.yml
+[08/12/13 16:49:39 +0530 enbake-System-Product-Name (12877)] INFO : Environment: development
+[08/12/13 16:49:39 +0530 enbake-System-Product-Name (12877)] INFO : No known dispatcher detected.
+[08/12/13 16:49:39 +0530 enbake-System-Product-Name (12877)] INFO : Application: SnapPea (Production)
+[08/12/13 16:49:39 +0530 enbake-System-Product-Name (12877)] WARN : Agent configured not to send data in this environment.
+[08/12/13 16:49:39 +0530 enbake-System-Product-Name (12877)] INFO : Installing Net instrumentation
+[08/12/13 16:49:39 +0530 enbake-System-Product-Name (12877)] INFO : Installing Sinatra instrumentation
+[08/12/13 16:49:39 +0530 enbake-System-Product-Name (12877)] INFO : Installing Resque instrumentation
+[08/12/13 16:49:39 +0530 enbake-System-Product-Name (12877)] INFO : Installing ActiveRecord instrumentation
+[08/12/13 16:49:39 +0530 enbake-System-Product-Name (12877)] INFO : Installing Rails 3 Controller instrumentation
+[08/12/13 16:49:39 +0530 enbake-System-Product-Name (12877)] INFO : Installing Rails 3.1/3.2 view instrumentation
+[08/12/13 16:49:39 +0530 enbake-System-Product-Name (12877)] INFO : Installing Rails3 Error instrumentation
+[08/12/13 16:49:39 +0530 enbake-System-Product-Name (12877)] INFO : Finished instrumentation
+[08/12/13 16:53:38 +0530 enbake-System-Product-Name (12928)] INFO : Starting the New Relic agent in "development" environment.
+[08/12/13 16:53:38 +0530 enbake-System-Product-Name (12928)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "development" section of your newrelic.yml.
+[08/12/13 16:53:38 +0530 enbake-System-Product-Name (12928)] INFO : Reading configuration from config/newrelic.yml
+[08/12/13 16:53:38 +0530 enbake-System-Product-Name (12928)] INFO : Environment: development
+[08/12/13 16:53:38 +0530 enbake-System-Product-Name (12928)] INFO : No known dispatcher detected.
+[08/12/13 16:53:38 +0530 enbake-System-Product-Name (12928)] INFO : Application: SnapPea (Production)
+[08/12/13 16:53:38 +0530 enbake-System-Product-Name (12928)] WARN : Agent configured not to send data in this environment.
+[08/12/13 16:53:39 +0530 enbake-System-Product-Name (12928)] INFO : Installing Net instrumentation
+[08/12/13 16:53:39 +0530 enbake-System-Product-Name (12928)] INFO : Installing Sinatra instrumentation
+[08/12/13 16:53:39 +0530 enbake-System-Product-Name (12928)] INFO : Installing Resque instrumentation
+[08/12/13 16:53:39 +0530 enbake-System-Product-Name (12928)] INFO : Installing ActiveRecord instrumentation
+[08/12/13 16:53:39 +0530 enbake-System-Product-Name (12928)] INFO : Installing Rails 3 Controller instrumentation
+[08/12/13 16:53:39 +0530 enbake-System-Product-Name (12928)] INFO : Installing Rails 3.1/3.2 view instrumentation
+[08/12/13 16:53:39 +0530 enbake-System-Product-Name (12928)] INFO : Installing Rails3 Error instrumentation
+[08/12/13 16:53:39 +0530 enbake-System-Product-Name (12928)] INFO : Finished instrumentation

@@ -1,0 +1,32 @@
+- event_vendor = EventVendor.new(:event_id => @event.id)
+- initial_vendors = Vendor.vendors_by_product(@event.product) - @event.event_vendors.map{|ev| ev.vendor}
+- available_cuisines = ["Any"].concat((initial_vendors.map{|v| v.cuisine_list}.flatten.uniq).sort)
+- initial_menu_templates = (initial_vendors.count > 0 ? initial_vendors.first.menu_templates_by_product(@event.product) : [])
+
+.modal-wrapper
+  .modal-header
+
+    %button.close{:type=>"button","data-dismiss"=>"modal"}
+      &times;
+
+    %h2 #{@event.name}
+    %br
+
+  .modal-body
+    = form_for [@event, event_vendor] do |f|
+      = f.hidden_field :product, value: @event.product
+      = f.label "Filter Vendors By Cuisine"
+      = select(:event_vendor, :cuisine, options_for_select(available_cuisines, nil), {:include_blank => false})
+      = f.label "Possible Vendors"
+      = select(:event_vendor, :vendor, options_for_select(initial_vendors.collect{|c| [c.name, c.id]}, nil), {:include_blank => false})
+      = f.label "Possible Menu-Templates"
+      = select(:event_vendor, :menu_template, options_for_select(initial_menu_templates.collect{|c| [c.name, c.id]}, nil), {:include_blank => false})
+      = f.label "Participation (leave blank for Event default)"
+      = f.number_field :participation
+      .row
+        .span2
+          = f.label "White Label Fooda"
+        .span1
+          = f.check_box :white_label_fooda
+      .modal-footer
+        = f.submit "Add Vendor", :class => "btn btn-primary"

@@ -1,0 +1,99 @@
+.row-fluid
+  .span12
+
+    = simple_form_for [@vendor, @menu_template] do |f|
+      .row-fluid
+        .span4  
+          = f.input :name
+          
+          = f.input :product_type, collection: ProductType.available_values.collect{|c| [c.titleize, c]}, :include_blank => "Product Type"
+          
+          = f.input :pricing_type, collection: MenuPricingType.available_values.collect{|c| [c.titleize, c]}, :include_blank => "Menu Pricing Type"
+          
+        .span4
+          Start Date
+          %br
+          .input-append.date.form_date
+            %input{:size => "16", :type => "text", :name => "menu_template[start_date]", :value => "#{@menu_template.start_date.strftime("%d %B %Y") unless @menu_template.start_date.nil?}"}}
+            %span.add-on
+              %i.icon-remove
+            %span.add-on
+              %i.icon-th
+          %br
+          Expiration Date
+          %i (Leave blank for no expiration)
+          %br
+          .input-append.date.form_date
+            %input{:size => "16", :type => "text", :name => "menu_template[expiration_date]", :value => "#{@menu_template.expiration_date.strftime("%d %B %Y") unless @menu_template.expiration_date.nil?}"}}
+            %span.add-on
+              %i.icon-remove
+            %span.add-on
+              %i.icon-th
+          %br
+
+      %div{:class => "js-hide-show", :style => (@menu_template.pricing_type == MenuPricingType.menu_level) ? "display: show" : "display: none"}
+        .row-fluid
+          .span12
+            %hr
+            %h4 Menu Level Pricing Tiers
+            .row-fluid
+              .span3
+                = f.label "Default Participation"
+                %input{:size => "16", :type => "text", :value => "0+", "readonly" => "true"}
+              .span3
+                = f.input :cogs, :label => "COGS"
+              .span3
+                = f.input :retail_price
+              .span3.no-label-push
+                = link_to_add_fields("<i class='icon-plus icon-white'></i>Menu-Level Discount".html_safe, f, :menu_level_discounts, {insertion_point: "#add_menu_level_discount_fields", :class => "btn btn-success"})            
+
+            = f.simple_fields_for :menu_level_discounts do |builder|
+              = render "menu_level_discount_fields", :f => builder
+            %div{:id => "add_menu_level_discount_fields"}
+
+            
+      .row-fluid
+        .span12
+          %hr
+          = f.submit  "Save Menu Template", :class => "btn btn-primary"
+
+          .pull-right
+            %a.btn{:href=>vendor_path(@vendor.id, :selected => "menu_templates")} Back to Vendor
+
+    - if @available_items
+      %br
+      %hr
+      .new_menu_template_group_form.modal.auto_size_modal.hide.fade{"id"=>"new_menu_template_group_form"}
+        = render :partial => "menu_templates/new_menu_template_group", :locals => {}
+      %a.btn.btn-success.toggle-modal.pull-right{"data-target"=>"#new_menu_template_group_form"}
+        %i.icon.icon-plus.icon-white
+        New Menu Template Group
+      %h2 Inventory Items
+
+      - @menu_template.menu_template_groups.each do |mtg|
+        .update_menu_template_group_form.modal.auto_size_modal.hide.fade{"id"=>"update_menu_template_group_form_" + mtg.id.to_s}
+          = render :partial => "menu_templates/update_menu_template_group", :locals => {mtg: mtg}
+        .pull-right
+          .btn-group
+            %a.btn.btn-small.toggle-modal{"data-target"=>"#update_menu_template_group_form_" + mtg.id.to_s}
+              %i.icon.icon-edit{"data-target"=>"#update_menu_template_group_form_" + mtg.id.to_s}
+            
+            -if mtg.can_destroy?
+              %a.btn.btn.btn-small.btn-danger{:href=>delete_menu_group_vendor_menu_template_path(@vendor, @menu_template, :menu_template_group_id => mtg.id), :"data-method" => "post", data: { confirm: 'Are you sure?' }}
+                %i.icon.icon-remove.icon-white
+            -else 
+              %a.btn.btn.btn-small.disabled
+                %i.icon.icon-remove.icon-white
+        .menu_template_group_form{"id"=>"menu_template_group_form_" + mtg.id.to_s}
+          = render :partial => "menu_templates/menu_template_group", :locals => {mtg: mtg}
+
+      .update_menu_template_no_group_form.auto_size_modal.modal.hide.fade
+        = render :partial => "menu_templates/update_menu_template_no_group"
+      .pull-right
+        %a.btn.btn-small.toggle-modal{"data-target"=>".update_menu_template_no_group_form"}
+          %i.icon.icon-edit{"data-target"=>".update_menu_template_no_group_form"}
+      .menu_template_no_group_form
+        = render :partial => "menu_templates/menu_template_no_group"                
+
+      .pull-right
+        %a.btn{:href=>vendor_path(@vendor.id, :selected => "menu_templates")} Back to Vendor

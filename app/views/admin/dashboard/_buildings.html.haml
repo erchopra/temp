@@ -1,0 +1,22 @@
+.pull-right.admin-buttons
+  %a.btn.btn-success.btn-small{ :href => '/admin/buildings/new' }
+    %i.icon.icon-plus.icon-white 
+    Building
+%table.table.table-striped
+  %thead
+    %tr
+      %th Name
+      %th Action
+    = paginate @buildings, :theme => 'twitter-bootstrap'
+    - @buildings.each do |building|
+      %tr
+        %td= link_to building.name, edit_admin_building_path(building)
+        %td
+          -if building.can_destroy?
+            %a.btn.btn-mini.btn-danger{:href=>admin_building_path(building), :"data-method" => "delete", data: { confirm: 'Are you sure?' }}
+              %i.icon.icon-white.icon-remove
+          -else 
+            %a.btn.btn.btn-mini.disabled
+              %i.icon.icon-remove.icon-white
+
+= paginate @buildings, :theme => 'twitter-bootstrap'

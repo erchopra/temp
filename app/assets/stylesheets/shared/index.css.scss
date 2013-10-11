@@ -1,0 +1,103 @@
+/*
+ *= require_tree .
+ *= require_self
+*/
+
+body {
+  margin-bottom: 100px;
+}
+
+.navbar-fixed-top {
+  position: relative;
+}
+.container {
+  margin-top: 30px;
+}
+
+table.account-product-pricing-tier {
+  width: 400px;
+}
+
+table.account-product-pricing-tier tr th {
+  background: #eee;
+}
+
+table.account-product-pricing-tier tr td {
+  text-align: center;
+  border-bottom: 1px #ccc solid;
+}
+
+// Dave said this was cool to do.
+.form-remove {
+  margin-top: 25px;
+}
+
+.container .alert-container {
+  .alert-success {
+    padding: 8px;
+    border-radius: 2px;
+  }
+  .alert-error {
+    padding: 8px;
+    border-radius: 2px;;
+  }
+  position: relative;
+  top: -20px;
+}
+.js-event-toggle-location-type
+{
+  display:none;
+  vertical-align:top;
+  float:left;
+  margin-left:0;
+  padding-left:0;
+}
+
+.inline_field_wrapper {
+    display: inline-block;
+}
+
+table.fixed { table-layout:fixed; }
+table.fixed td { overflow: hidden; }
+
+.admin-buttons {
+  float:right;
+  position:relative;
+  padding-top: 15px;
+}
+
+.admin-email-buttons {
+  float:right;
+  position:relative;
+  padding-top: 5px;
+}
+
+.center {
+  text-align: center;
+}
+
+.searchable-sortable-pagination-form {
+  background: #f5f5f5;
+  padding: 30px;
+  margin-bottom: 50px;
+}
+
+.create-buttons {
+  margin: 10px 0px 40px 0px;
+  float:right;
+  position:relative;
+}
+
+#homepage {
+  text-align: center;
+  margin-top: 200px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+#issue-priority {
+  margin-top: 10px;
+  margin-right: 150px;
+}

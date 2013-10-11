@@ -1,0 +1,80 @@
+= simple_form_for [@account, @location] do |f|
+  .row-fluid
+    .span4
+      = f.input :location_type, collection: LocationType::available_values.collect{|c| [c.titleize, c]}, include_blank: "Location Type", label: false, :input_html => {:style=> 'width: 100%'}
+    .span8
+  %hr
+  .row-fluid.js-event-toggle-location-type
+    .span3
+      %h5 Details
+      = f.input :name, placeholder: "Location Name", label: false
+      = f.association :contact, collection: Contact.where(account_id: @account.id), include_blank: "Contact", label: false
+      = f.association :building, include_blank: "Building", label: false
+
+    .span5
+      %h5 Location Specific Building Address 
+      = f.simple_fields_for :building do |b|
+        = b.simple_fields_for :address do |a|
+          = a.input :address1, 
+            input_html: { style: 'width: 335px' },
+            placeholder: "Address Line 1", 
+            readonly: true, 
+            as: :string, 
+            label: false
+      = f.input :building_address_notes, 
+        :input_html => {:style=> 'width: 335px'}, 
+        placeholder: "Address Line 2", 
+        label: false
+      = f.simple_fields_for :building do |b|
+        = b.simple_fields_for :address do |a|
+          = a.input :city, 
+            input_html: { maxlength: 30},
+            wrapper_html: { class: "inline_field_wrapper" }, 
+            placeholder: "City", 
+            readonly: true, 
+            as: :string, 
+            label: false
+          = a.input :state,
+            input_html: { maxlength: 2, style: 'width: 35px'}, 
+            wrapper_html: { class: "inline_field_wrapper" }, 
+            placeholder: "State", 
+            readonly: true, 
+            as: :string, 
+            label: false
+          = a.input :zip_code,
+            input_html: { maxlength: 6, style: 'width: 60px'}, 
+            wrapper_html: { class: "inline_field_wrapper" }, 
+            placeholder: "Zip Code", 
+            readonly: true, 
+            as: :string, 
+            label: false
+          = a.input :country, 
+            placeholder: "Country", 
+            wrapper_html: { class: "inline_field_wrapper" }, 
+            readonly: true, 
+            as: :string, 
+            label: false
+
+    .js-event-toggle-location-type-spot
+      .span3
+        %h5 Privacy
+        = f.input :privacy, collection: LocationPrivacy.available_values.collect{|c| [c.titleize, c]}, as: :radio_buttons, :label => false
+        %br
+        %h5 Expected Participation
+        = f.input :expected_participation, as: :integer, label: false, placeholder: "Expected Participation"
+
+    .row-fluid
+      .span12
+        %hr
+        %h5 Notes
+    .row-fluid
+      .span4
+        = f.input :service_event_instructions, as: :text, :input_html => {:style=> 'width: 90%', :rows => 5}, label: "Service Event Instructions"
+      .span4
+        = f.input :connectivity_instructions, as: :text, :input_html => {:style=> 'width: 90%', :rows => 5}, label: "Connectivity Instructions"
+      .span4 
+        = f.input :delivery_event_instructions, as: :text, as: :text, :input_html => {:style=> 'width: 90%', :rows => 5}, label: "Delivery Event Instructions"
+    .row-fluid
+      .span12
+        %hr
+        = f.submit(:class => "btn btn-primary")

@@ -1,0 +1,33 @@
+- unique_id = line_item.id.to_s
+
+.modal-wrapper
+  = form_for [@event, line_item] do |f|
+
+    .modal-header
+
+      %button.close{:type=>"button","data-dismiss"=>"modal"}
+        &times;
+      %h2 #{line_item.name}
+      %h4 #{line_item.line_item_type}
+      ID: #{line_item.pretty_id}
+
+    .modal-body.auto_size_modal_body
+      
+      .row
+        .span4
+          .in-between
+          = f.label :sku
+          = f.text_field :sku, :readonly => true
+          .in-between
+          = f.label :name
+          = f.text_field  :name
+          .in-between
+          = f.label :quantity
+          = f.number_field :quantity
+          .in-between
+          - if !line_item.payable_party_type.nil?
+            = f.label "Prep Notes"
+            = f.text_area :notes, :size => "30x5"
+
+    .modal-footer
+      = f.submit commit_text, :class => "btn btn-primary"

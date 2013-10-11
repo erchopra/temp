@@ -1,0 +1,18 @@
+- if user_signed_in?
+  -provide(:title, 'Home')
+  .section-header
+    %h1.center Dashboard
+
+  %ul#section-tab-navigation.nav.nav-tabs
+    %li{class: params[:selected].nil? || params[:selected] == "my_issues" ? 'active' : ''}
+      %a{:href=>"#my_issues"} My Issues
+  #section-tabs
+    #my_issues.section-tab{style: params[:selected].nil? || params[:selected] == "my_issues" ? '' : 'display:none'}
+      = render :partial => "issues/index"
+- else
+  -provide(:title, 'Welcome')
+  .row
+    .span6.offset3
+      #homepage.hero-unit 
+        %h2 Welcome to SnapPea!
+        The lightning fast tool that empowers Fooda.

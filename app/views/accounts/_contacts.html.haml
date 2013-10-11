@@ -1,0 +1,55 @@
+.new-contact-form.modal.hide.fade
+  = render :partial => "contacts/new", :locals => {party: @account}
+
+.pull-right
+  %a.btn.btn-success.btn-small.toggle-modal{"data-target"=>".new-contact-form"}
+    %i.icon.icon-plus.icon-white.toggle-modal{"data-target"=>".new-contact-form"}
+    Contact
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Name
+      %th Position
+      %th Email
+      %th Phone Number
+      %th Mobile Number
+      %th Fax Number
+      %th Primary Contact
+      %th Billing Notifications
+      %th Event Notifications
+      %th SMS
+      %th Actions
+  %tbody
+    - @account.contacts.sort_by{|c| c.name}.each do |c|
+      .modal.hide.fade{"id"=>"edit_account_contact_form_" + c.id.to_s}
+        = render :partial => "contacts/edit", :locals => {party: @account, contact: c}
+      %tr{"data-record-id"=>c.id}
+        %td
+          %a.pointer.toggle-modal{"data-target"=>"#edit_account_contact_form_" + c.id.to_s}#{c.name}
+        %td= c.position
+        %td= mail_to c.email 
+        %td= c.phone_number
+        %td= c.mobile_number
+        %td= c.fax_number
+        .center
+          %td
+            - if c.primary_contact
+              %i.icon.icon-ok
+          %td
+            - if c.billing_notifications
+              %i.icon.icon-ok
+          %td
+            - if c.event_notifications
+              %i.icon.icon-ok
+          %td
+            - if c.sms
+              %i.icon.icon-ok
+        %td
+          -if c.can_destroy?
+            %a.btn.btn-mini.btn-danger{:href=>account_contact_path(@account, c), :"data-method" => "delete", data: { confirm: 'Are you sure?' }}
+              %i.icon.icon-white.icon-remove
+          -else 
+            %a.btn.btn.btn-mini.disabled
+              %i.icon.icon-remove.icon-white
+

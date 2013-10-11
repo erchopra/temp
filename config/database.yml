@@ -1,0 +1,35 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: snappea_development
+  pool: 5
+  username: c2s
+  password: C2s!066
+  host: localhost
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: snappea_test
+  pool: 5
+  username: c2s
+  password: C2s!066
+  host: localhost
+
+staging:
+  adapter: postgresql
+  encoding: unicode
+  database: snappea_core
+  pool: 5
+  username: c2s
+  password: C2s!066
+  host: localhost
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: snappea_production
+  pool: 5
+  username: c2s
+  password: C2s!066
+  host: localhost

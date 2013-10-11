@@ -1,0 +1,13 @@
+%tr{"data-model"=>"vendor","data-id"=>"#{ vendor.id }","data-name"=>"#{ vendor.name }"}
+  %td= link_to vendor.name, vendor_path(vendor)
+  %td= vendor.cuisine_list unless vendor.cuisine_list.nil?
+  %td= vendor.products.map{|p| p.product.titleize}.join(", ") unless vendor.products.nil?
+  %td= vendor.vendor_manager unless vendor.vendor_manager.nil?
+  %td
+    .btn-group
+      -if vendor.can_destroy?
+        %a.btn.btn-small.btn-danger{:href=>vendor_path(vendor), "data-remote"=>true, "data-method"=>"delete", :rel=>"nofollow", "data-confirm"=>"Are you sure?"}
+          %i.icon.icon-remove.icon-white
+      -else
+        %a.btn.btn-small.disabled
+          %i.icon.icon-remove.icon-white

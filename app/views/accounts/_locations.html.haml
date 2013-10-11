@@ -1,0 +1,72 @@
+.pull-right
+  %a.btn.btn-success.btn-small{ :href => '/admin/buildings/new?referrer=' + request.path_info + "?selected=locations" }
+    %i.icon.icon-plus.icon-white
+    Building
+  %a.btn.btn-success.btn-small{ :href => new_account_location_path(@account) }
+    %i.icon.icon-plus.icon-white 
+    Location
+
+%h3 Spot Locations
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Name
+      %th Address
+      %th Building
+      %th Participation
+      %th Privacy
+      %th Contact
+      %th 
+  %tbody
+    - @account.locations.where(:location_type => "spot").each do |l|
+      %tr{"data-record-id"=>l.id}
+        - unless l.contact.nil?
+          .modal.hide.fade{"id"=>"edit_location_contact_form_" + l.contact.id.to_s}
+            = render :partial => "contacts/edit", :locals => {party: @account, contact: l.contact}
+        %td= link_to l.name, edit_account_location_path(@account, l)
+        %td= "#{l.building.address.address1} #{l.building_address_notes} #{l.building.address.city}"
+        %td= link_to l.building.name, edit_admin_building_path(l.building)
+        %td= l.expected_participation
+        %td= l.privacy.titleize unless l.privacy.nil?
+        %td
+          -unless l.contact.nil?
+            %a.pointer.toggle-modal{"data-target"=>"#edit_location_contact_form_" + l.contact.id.to_s}#{l.contact}
+        %td
+          -if l.can_destroy?
+            %a.btn.btn-mini.btn-danger{:href=>account_location_path(@account, l), :"data-method" => "delete", data: { confirm: 'Are you sure?' }}
+              %i.icon.icon-white.icon-remove
+          -else
+            %a.btn.btn-mini.disabled
+              %i.icon.icon-white.icon-remove
+
+
+%h3 Delivery Locations
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Name 
+      %th Address
+      %th Building
+      %th Contact
+      %th 
+  %tbody
+    - @account.locations.where(:location_type => "delivery").each do |l|
+      %tr{"data-record-id"=>l.id}
+        - unless l.contact.nil?
+          .modal.hide.fade{"id"=>"edit_location_contact_form_" + l.contact.id.to_s}
+            = render :partial => "contacts/edit", :locals => {party: @account, contact: l.contact}
+        %td= link_to l.name, edit_account_location_path(@account, l)
+        %td= "#{l.building.address.address1} #{l.building_address_notes} #{l.building.address.city}"
+        %td= link_to l.building.name, edit_admin_building_path(l.building)
+        %td
+          - unless l.contact.nil?
+            %a.pointer.toggle-modal{"data-target"=>"#edit_location_contact_form_" + l.contact.id.to_s}#{l.contact}
+        %td 
+          -if l.can_destroy?
+            %a.btn.btn-mini.btn-danger{:href=>account_location_path(@account, l), :"data-method" => "delete", data: { confirm: 'Are you sure?' }}
+              %i.icon.icon-white.icon-remove
+          -else
+            %a.btn.btn-mini.disabled
+              %i.icon.icon-white.icon-remove

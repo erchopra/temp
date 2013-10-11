@@ -1,0 +1,97 @@
+-provide(:title, "Account | #{@account.pretty_id}")
+
+#account_status_update.auto_size_modal.modal.hide.fade
+  .modal-wrapper
+    .modal-header
+      %button.close{:type=>"button","data-dismiss"=>"modal"}
+        &times;
+
+      %h3 Account Status
+
+    .modal-body.auto_size_modal_body
+      = simple_form_for @account, remote: false do |a|
+        = a.input :active, inline_label: "Active", label: false
+
+        .modal-footer
+          = a.button :submit, "Update Account Status", class: "btn btn-primary"
+
+
+- content_for :head do
+  = stylesheet_link_tag "accounts"
+
+#account-details
+  .row-fluid
+    .span12
+      %h1.center 
+        = @account.name
+  .row-fluid
+    .span12
+      - if @account.active
+        .label.label-success.toggle-modal{"data-target"=>"#account_status_update"} Active
+      - else
+        .label.label-warning.toggle-modal{"data-target"=>"#account_status_update"} Inactive
+      %br
+      %b.account-id
+        ID: 
+        = @account.pretty_id
+  .row-fluid
+    .span12
+      %hr
+
+  = simple_form_for(@account) do |f|
+    .row-fluid
+      .span2
+        = image_tag(@account.image, size: "100%x100%", alt: @account.name)
+        = f.input :image, :as => :file, label: false
+      .span8
+        %h4 Account Details
+        .row-fluid
+          .span4
+            = f.input :name
+            = f.input :account_type, collection: AccountType.available_values.collect{|c| [c.titleize, c]}, label: "Account Type"
+            = f.input :website
+
+          .span4
+            = f.input :account_manager_id, collection: User.all, label_method: :username, value_method: :id, label: "Account Manager"
+            = f.input :account_exec_id, collection: User.all, label_method: :username, value_method: :id, label: "Account Executive"
+            = f.input :sales_rep_id, collection: User.all, label_method: :username, value_method: :id, label: "Sales Representative"
+
+    .row-fluid
+      .span12
+        .pull-right
+          = f.submit "Save Account", :class => "btn btn-primary"
+
+
+  %ul#section-tab-navigation.nav.nav-tabs
+    %li{class: params[:selected].nil? || params[:selected] == "billing" ? 'active' : ''}
+      %a{:href=>"#billing"} Billing
+    %li{class: params[:selected] == "pricing_tiers" ? 'active' : ''}
+      %a{:href=>"#pricing_tiers"} Pricing Tiers
+    %li{class: params[:selected] == "contacts" ? 'active' : ''}
+      %a{:href=>"#contacts"} Contacts
+    %li{class: params[:selected] == "locations" ? 'active' : ''}
+      %a{:href=>"#locations"} Locations
+    %li{class: params[:selected] == "events" ? 'active' : ''}
+      %a{:href=>"#events"} Events
+    %li{class: params[:selected] == "preferences" ? 'active' : ''}
+      %a{:href=>"#preferences"} Preferences
+    %li{class: params[:selected] == "issues" ? 'active' : ''}
+      %a{:href=>"#issues"} Issues
+
+  #section-tabs
+    #billing.section-tab{style: params[:selected].nil? || params[:selected] == "billing" ? '' : 'display:none'}
+      = render :partial => "accounts/billing", :locals => {account: @account}
+      = render partial: "accounts/billing_reference_report"
+    #pricing_tiers.section-tab{style: params[:selected] == "pricing_tiers" ? '' : 'display:none'}
+      = render :partial => "accounts/account_pricing_tier", :locals => {account: @account, account_pricing_tiers: @account_pricing_tiers}
+    #contacts.section-tab{style: params[:selected] == "contacts" ? '' : 'display:none'}
+      = render partial: "accounts/contacts", local: {account: @account}
+    #locations.section-tab{style: params[:selected] == "locations" ? '' : 'display:none'}
+      = render partial: "accounts/locations", local: {account: @account}
+    #events.section-tab{style: params[:selected] == "events" ? '' : 'display:none'}
+      = render partial: "accounts/events", local: {account: @account} 
+    #preferences.section-tab{style: params[:selected] == "preferences" ? '' : 'display:none'}
+      = render partial: "accounts/preferences", local: {account: @account}      
+    #issues.section-tab{style: params[:selected] == "issues" ? '' : 'display:none'}
+      = render partial: "issues/issues", locals: {subject: @account}
+

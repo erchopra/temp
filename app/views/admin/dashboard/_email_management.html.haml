@@ -1,0 +1,71 @@
+.row
+  .span12
+    .pull-right.admin-email-buttons
+      %a.btn.btn-primary.btn-small{ :href => new_admin_email_path }
+        %i.icon.icon-edit.icon-white
+        Edit Email Lists
+
+%hr
+
+.row
+  .span6
+    .pull-right.admin-email-buttons
+      %a.btn.btn-small{ :href => 'admin/mailer/catering_schedule_preview' }
+        Preview
+      %a.btn.btn-small{ :href => 'admin/mailer/catering_schedule_preview?send=true' }
+        Send
+    %h4 Catering Schedule Preview (4:00pm)
+    %table.table.table-striped.table-condensed
+      %thead
+        %tr
+          %th Email
+          %th Action
+
+        - @catering_schedule_preview.each do |e|
+          %tr
+            %td= link_to e.email, edit_admin_email_path(e)
+            %td
+              %a.btn.btn-mini.btn-danger{:href => admin_email_path(e), :"data-method" => "delete", data: { confirm: 'Are you sure?' }}
+                %i.icon.icon-white.icon-remove
+  .span6
+    .pull-right.admin-email-buttons
+      %a.btn.btn-small{ :href => 'admin/mailer/end_of_day_sales_report' }
+        Preview
+      %a.btn.btn-small{ :href => 'admin/mailer/end_of_day_sales_report?send=true' }
+        Send
+    %h4 End of Day New Catering Sales (4:00pm)
+    %table.table.table-striped.table-condensed
+      %thead
+        %tr
+          %th Email
+          %th Action
+
+        - @new_catering_sales.each do |e|
+          %tr
+            %td= link_to e.email, edit_admin_email_path(e)
+            %td
+              %a.btn.btn-mini.btn-danger{:href=>admin_email_path(e), :"data-method" => "delete", data: { confirm: 'Are you sure?' }}
+                %i.icon.icon-white.icon-remove
+%hr
+.row
+  .span6
+    .pull-right.admin-email-buttons
+      %a.btn.btn-small{ :href => 'admin/mailer/vendor_billing_summaries' }
+        Email Template Preview
+      %a.btn.btn-small{ :href => 'admin/mailer/vendor_billing_summaries?send=true&no_vendors=true' }
+        Send to the list below
+      %a.btn.btn-warning.btn-small{ :href => 'admin/mailer/vendor_billing_summaries?send=true', :"data-method" => "get", data: { confirm: 'Are you sure?  This will email all vendor billing contacts!' } }
+        Send to Vendors
+    %h4 Vendor Billing Summaries (3:00pm)
+    %table.table.table-striped.table-condensed
+      %thead
+        %tr
+          %th Email
+          %th Action
+
+        - @vendor_billing_summaries.each do |e|
+          %tr
+            %td= link_to e.email, edit_admin_email_path(e)
+            %td
+              %a.btn.btn-mini.btn-danger{:href => admin_email_path(e), :"data-method" => "delete", data: { confirm: 'Are you sure?' }}
+                %i.icon.icon-white.icon-remove

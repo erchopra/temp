@@ -1,0 +1,26 @@
+%p#notice= notice
+%p
+  %b Name:
+  = @inventory_item.name_vendor
+%p
+  %b Description:
+  = @inventory_item.description
+%p
+  %b Tags:
+  = @inventory_item.tag_list
+%p
+  %b Options:
+  = @inventory_item.option_list
+%p
+  %b COGS:
+  = @inventory_item.cogs
+%p
+  %b Perks Price:
+  = @inventory_item.perks_price
+%p
+  %b Retail Price:
+  = @inventory_item.retail_price
+
+= link_to 'Edit', edit_vendor_inventory_item_path(@inventory_item)
+|
+\#{link_to 'Back to Vendor', @vendor}

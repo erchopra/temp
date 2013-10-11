@@ -1,0 +1,55 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container-fluid
+      .brand
+        = link_to image_tag("logo.png", :border => 0, size: "90x90"), root_url
+      .nav-collapse.collapse.navbar-responsive-collapse
+        - if user_signed_in?
+          %ul.nav
+            / %li{ :class => ('active' if request.path_info == "/")}
+            /   %a{:href => "/"} Home
+            %li{ :class => ('active' if request.path_info == "/") }
+              %a{:href => "/"} Dashboard
+            %li{ :class => ('active' if request.path_info.start_with? ('/vendors')) }
+              %a{:href => "/vendors"} Vendors
+            %li{ :class => ('active' if request.path_info.start_with? ('/accounts')) }
+              %a{:href => "/accounts"} Accounts
+            %li{ :class => ('active' if request.path_info.start_with? ('/events')) }
+              %a{:href => "/events"} Events
+
+        %ul.nav.pull-right
+          - if user_signed_in?
+            %li{:class=>"dropdown"}
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                = current_user.username
+                %b.caret
+              %ul.dropdown-menu
+                %li
+                  %a{:href => "#{root_url}profiles/#{current_user.id.to_s }"}
+                    %i.icon-user
+                    Profile
+                %li
+                  %a{:href => logout_path }
+                    %i.icon-off
+                    Logout         
+            %li{:class=>"dropdown"}
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#" }
+                Admin
+                %b.caret
+              %ul.dropdown-menu
+                %li= link_to "Dashboard", '/admin'
+                %li= link_to "User Management", '/admin/users'
+                %li.divider
+                %li.nav-header Reports
+                %li= link_to "Managed Service", admin_managed_services_reports_path
+                %li= link_to "Perks", "#"
+                %li= link_to "Select", "#"
+                %li= link_to "Miscellaneous", admin_general_reports_path
+          - else
+            %li
+              = link_to "Login", login_path
+            / %li
+            /   = link_to "Register", register_path
+
+        - if user_signed_in?
+          = render :partial => "search/control"

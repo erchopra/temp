@@ -1,0 +1,10 @@
+-provide(:title, @profile.username)
+.page-header
+  %h1
+    #{@profile.username}'s Profile
+
+%h4 User Information
+%ul
+  %li= @profile.email
+  %li= @profile.username
+  /%li= link_to "Change your password", new_user_password_path

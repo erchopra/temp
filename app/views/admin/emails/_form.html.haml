@@ -1,0 +1,5 @@
+= simple_form_for [:admin, @email] do |f|
+
+  = f.input :email_list, collection: DocumentType::Email.available_values.collect{|c| [c.titleize, c]}
+  = f.input :email
+  = f.submit (@email.id.nil? ? "Add to List" : "Update Email Address"), :class => "btn btn-primary"

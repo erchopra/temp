@@ -1,0 +1,15 @@
+- provide :title, "Managed Service Reports"
+.section-header
+  %h1.center Managed Service Reporting
+  %hr
+
+  = ssp_search_form Event, 
+    [{ :name => :outer_group, :as => :select, :collection => ["Sales Rep", "Date", "Account", "Vendor"]},
+    { :name => :status, :as => :multi_select, :collection => Status::Event.available_values, :nil_means_all => true},
+    { :name => :inner_group, :as => :select, :collection => ["Sales Rep", "Date", "Account", "Vendor"]},
+    { :name => :product, :as => :multi_select, :collection => Product.get_available_products(ProductType.managed_services), :nil_means_all => true},
+    { :name => :vendor, :as => :string, :wildcard => :both },
+    { :name => :account, :as => :string, :wildcard => :both },
+    { :name => :col, :label => "Columns", :as => :multi_select, :collection => ["Account", "Date", "Event ID", "Sales Rep", "Product", "Vendors", "Group Size", "COGS", "Delivery Charge", "Subtotal", "Gratuity", "Enterprise Fee", "Revenue", "Tax", "Total Billing", "GP", "GP%", "Status"], :nil_means_all => true},], {:ssp_persistence => "managed_services_reports"}
+
+= render :partial => "admin/managed_services_reports/table", :locals => {allow_links: true}

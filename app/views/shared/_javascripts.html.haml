@@ -1,0 +1,14 @@
+= javascript_include_tag 'dependencies'
+
+%script{:type=>"text/javascript"}
+  window.Application = _.extend({},Backbone.Events);
+
+= javascript_include_tag 'shared', 'application'
+
+:javascript
+  Application.data = Application.data || {};
+  Application.data.cuisines = #{ StaticData::Cuisines.to_json.html_safe };
+  Application.data.inventory_tags = #{ StaticData::InventoryTags.to_json.html_safe };
+  Application.data.dietary_restrictions = #{ StaticData::DietaryRestrictions.to_json.html_safe };
+
+= yield(:local_data)

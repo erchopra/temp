@@ -1,0 +1,39 @@
+%h5 Location Specific Building Address 
+= f.simple_fields_for :building do |b|
+  = b.simple_fields_for :address do |a|
+    = a.input :address1, 
+      input_html: { value: location.building.address.address1, style: 'width: 335px' },
+      placeholder: "Address Line 1",
+      readonly: true, 
+      label: false
+= f.input :building_address_notes, 
+  input_html: { style:'width: 335px' }, 
+  placeholder: "Address Line 2", 
+  label: false
+= f.simple_fields_for :building do |b|
+  = b.simple_fields_for :address do |a|
+    = a.input :city, 
+      input_html: { value: location.building.address.city, maxlength: 30}, 
+      wrapper_html: { class: "inline_field_wrapper" }, 
+      placeholder: "City", 
+      readonly: true, 
+      label: false
+    = a.input :state, 
+      input_html: { value: location.building.address.state, style: 'width: 35px'},
+      wrapper_html: { class: "inline_field_wrapper" }, 
+      placeholder: "State",
+      readonly: true,
+      label: false
+    = a.input :zip_code, 
+      wrapper_html: { class: "inline_field_wrapper" }, 
+      input_html: { value: location.building.address.zip_code, style: 'width: 60px'},
+      placeholder: "Zip Code", 
+      readonly: true, 
+      label: false
+    = a.input :country, 
+      input_html: { value: location.building.address.country }, 
+      wrapper_html: { class: "inline_field_wrapper" },
+      placeholder: "Country", 
+      readonly: true,
+      as: :string,
+      label: false

@@ -1,0 +1,44 @@
+= simple_form_for [:admin, @building] do |f|
+  = hidden_field_tag :referrer, params[:referrer]
+  .row-fluid
+    .span3
+      %h4 General Information
+      = f.input :name, label: "Building Name"
+      = f.association :market
+      = f.input :timezone, collection: ActiveSupport::TimeZone.us_zones.map(&:name)
+      = f.input :insurance_required, inline_label: "Require Insurance", label: false
+      = f.input :insurance_requirements, label: "Insurance Notes", as: :text, input_html: { rows: 9 }
+    .span3
+      %h4 Building Contact
+      = f.input :contact_name, label: "Contact Name"
+      = f.input :contact_title, label: "Title"
+      = f.input :contact_email, label: "Email"
+      = f.input :contact_phone, label: "Phone"
+      = f.input :contact_cell, label: "Cell"
+      = f.input :contact_fax, label: "Fax"
+    .span6
+      %h4 Building Address
+      = f.simple_fields_for :address do |a|
+        = a.input :address1, :input_html => {:style=> 'width: 335px'}, placeholder: "Address Line 1", label: false
+        = a.input :address2, :input_html => {:style=> 'width: 335px'}, placeholder: "Address Line 2", label: false
+        = a.input :city, placeholder: "City", wrapper_html: { class: "inline_field_wrapper" }, input_html: { maxlength: 30}, label: false
+        = a.input :state, placeholder: "State", wrapper_html: { class: "inline_field_wrapper" }, input_html: { maxlength: 2, style: 'width: 35px'}, label: false
+        = a.input :zip_code, placeholder: "Zip Code", wrapper_html: { class: "inline_field_wrapper" }, input_html: { maxlength: 6, style: 'width: 60px'}, label: false
+        .inline_field_wrapper
+          = a.input :country, :as => :country, include_blank: "Country", label: false, wrapper_html: { class: "inline_field_wrapper" }
+  .row-fluid
+    .span12
+      %hr
+      %h4 Notes
+  .row-fluid
+    .span4
+      = f.input :loading_information, as: :text, label: "Loading Information", input_html: { style: 'width: 100%', rows: 12 }
+    .span4
+      = f.input :site_directions, as: :text, label: "Site Directions", input_html: { style: 'width: 100%', rows: 12 }
+    .span4
+      = f.input :parking_information, as: :text, label: "Parking Information", input_html: { style: 'width: 100%', rows: 12 }
+
+  .row
+    .form-actions
+      .pull-right
+        = f.button :submit, (@building.id.nil? ? "Create Building" : "Save Building"), :class => "btn btn-primary"

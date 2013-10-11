@@ -1,0 +1,31 @@
+-provide(:title, 'Admin')
+#admin-details
+  .page-header
+    %h1 Global SnapPea Administration
+
+    %hr
+
+    %ul#section-tab-navigation.nav.nav-tabs
+      %li{class: params[:selected].nil? || params[:selected] == "buildings" ? 'active' : ''}
+        %a{:href=>"#buildings"} Buildings
+      %li{class: params[:selected] == "pricing_tiers" ? 'active' : ''}
+        %a{:href=>"#pricing_tiers"} Pricing Tiers
+      %li{class: params[:selected] == "markets" ? 'active' : ''}
+        %a{:href=>"#markets"} Markets
+      %li{class: params[:selected] == "email_management" ? 'active' : ''}
+        %a{:href=>"#email_management"} Email Management
+
+    #section-tabs
+
+      #buildings.section-tab{style: params[:selected].nil? || params[:selected] == "buildings" ? '' : 'display:none'}
+        = render :partial => "admin/dashboard/buildings"
+
+      #pricing_tiers.section-tab{style: params[:selected] == "pricing_tiers" ? '' : 'display:none'}
+        = render :partial => "admin/dashboard/pricing_tiers"
+
+      #markets.section-tab{style: params[:selected] == "markets" ? '' : 'display:none'}
+        = render :partial => "admin/dashboard/markets"
+
+      #email_management.section-tab{style: params[:selected] == "email_management" ? '' : 'display:none'}
+        = render :partial => "admin/dashboard/email_management"
+  

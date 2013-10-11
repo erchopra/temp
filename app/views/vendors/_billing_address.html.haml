@@ -1,0 +1,38 @@
+#billing-address-section.form-actions
+  = simple_form_for(@vendor, :remote => true, :data => {type: :json}) do |f|
+    %input{:type=>"hidden",:name=>"_method",:value=>"PUT"}
+
+    .container.control-group
+      .row-fluid
+        .span6
+          %h3 Billing Address
+          = f.simple_fields_for :address do |a|
+            = a.input :address1, 
+              input_html: { style: 'width: 335px' },
+              label: false,
+              placeholder: "Address Line 1"
+            = a.input :address2, 
+              input_html: { style: 'width: 335px' },
+              label: false,
+              placeholder: "Address Line 2"
+            = a.input :city, 
+              input_html: { maxlength: 30}, 
+              wrapper_html: { class: "inline_field_wrapper" },
+              label: false,
+              placeholder: "City"
+            = a.input :state, 
+              input_html: { style: 'width: 35px'},
+              wrapper_html: { class: "inline_field_wrapper" },
+              label: false,
+              placeholder: "State"
+            = a.input :zip_code, 
+              wrapper_html: { class: "inline_field_wrapper" }, 
+              input_html: { style: 'width: 60px'},
+              label: false,
+              placeholder: "Zip Code"
+            = a.input :country, 
+              wrapper_html: { class: "inline_field_wrapper" },
+              label: false,
+              include_blank: "Country"
+      .row-fluid
+        = f.button :submit, "Save Billing Address", :class => "btn btn-primary"

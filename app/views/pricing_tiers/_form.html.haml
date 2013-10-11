@@ -1,0 +1,9 @@
+= form_for(@pricing_tier) do |f|
+  %br/
+  = f.label "Pricing Tier name"
+  = f.text_field :name
+  .in-between
+  = f.label :gross_profit
+  = f.text_field :gross_profit
+  .in-between
+  = f.submit(:class => "btn btn-primary")

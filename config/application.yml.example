@@ -1,0 +1,33 @@
+# This is how we control senstive data in Snappea. Talk to DrMavenRebe if 
+# you think you want to add something to the list. To get Snappea running 
+# copy this file to config/application.yml and uncomment the credentials below.
+
+# The first set of credentials are defaulted through every environment unless specified. 
+
+# These AWS credentials are for the Fooda Snappea default bucket. Please change them to an 
+# appropriate bucket if you wish to keep the data you send to AWS as there is no 
+# guarantee we won't delete it without warning. They should get you off the ground though.
+AWS_ACCESS_KEY_ID: AKIAJVA4G5ZOQ2I2DW4A
+AWS_SECRET_ACCESS_KEY: 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
+AWS_DEFAULT_REGION: us-east-1
+AWS_S3_PUBLIC_BUCKET: snappea-default
+AWS_S3_PRIVATE_BUCKET: snappea-default
+AWS_S3_PRIVATE_WINDOW: 86400
+
+REDIS_URL: http://localhost:6379
+
+# Any SMTP will do. For Heroku, add a mail add-on (like Mandril) and show grab the credentails 
+# from the page. We have a generic gmail in there for easy development but this will not work on Heroku. 
+SMTP_USERNAME: foodasnappea@gmail.com
+SMTP_PASSWORD: Z3qbJ*betYBtBkR
+
+# These credentials overwrite the above defaults for the production environment. If you want to deploy to Heroku to test it out 
+# you can grab the AWS keys above. 
+production:
+
+  # For Heroku, add a redis add-on (like Redis-To-Go) and shove the url here. For Example: 
+  # REDIS_URL: redis://redistogo:17a5f0a1dd2b135fd3552352abbqwe8b5fd@squawfish.redistogo.com:9740
+  REDIS_URL:
+
+  SMTP_USERNAME: 
+  SMTP_PASSWORD:

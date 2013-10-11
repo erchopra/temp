@@ -1,0 +1,49 @@
+.row
+  .span12
+    = simple_form_for [@vendor, @inventory_item] do |f|
+      .row
+        .span3
+      
+          = f.input :name_vendor, :label => "Name (Vendor)"
+
+          = f.input :name_public, :label => "Name (Public)"
+          
+          = f.select :meal_type, MealType.available_values.sort.collect{|c| [c.titleize, c]}, :include_blank => "Item Type"
+          
+          = f.input :description, input_html: { rows: 7 }
+      
+        .span3
+          = f.input :tag_list, label: "Internal Tags", :input_html => {class: "select2 input-large", "data-restricted"=>true,"data-tag-source"=>"Application.data.inventory_tags"}
+          
+          = f.input :external_tag_list, label: "External Tags", :input_html => {class: "select2 input-large", "data-restricted"=>true,"data-tag-source"=>"Application.data.inventory_tags"}
+          
+          = f.input :dietary_restriction_list, label: "Dietary Restrictions", :input_html => {class: "select2 input-large", "data-restricted"=>true,"data-tag-source"=>"Application.data.dietary_restrictions"}
+        
+        .span3
+          = f.input :cogs, label: "COGS"
+          = f.input :perks_price
+          = f.input :retail_price
+      
+        .span3
+          .product-type-selectors
+
+          - ProductType.available_values.each do |product_type|
+            - checked = (@inventory_item.inventory_item_product_types.where(:product_type => product_type).count > 0)
+            .control-group
+              .row
+                .span2
+                  %label= product_type.titleize
+                .span1
+                  %input{:checked=>checked, :id=>"product_type_allowed_#{ product_type }",:type=>"checkbox",:name=>"inventory_item[product_types_allowed][#{ product_type }]"}
+      
+      .row-fluid
+        .span12
+          %hr
+          - if !@menu.nil?
+            = f.simple_fields_for @menu do |menu|
+              = menu.hidden_field :id
+          = f.submit "Save Inventory Item", :class => "btn btn-primary"
+
+          .pull-right
+            %a.btn{:href=>vendor_path(@vendor.id, :selected => "inventory_items")} Back to Vendor
+

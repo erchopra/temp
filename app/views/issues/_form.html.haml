@@ -1,0 +1,37 @@
+- issue ||= Issue.new
+
+.modal-wrapper
+  = simple_form_for [subject, issue] do |f|
+
+    .modal-header
+      %button.close{:type=>"button","data-dismiss"=>"modal"}
+        &times;
+
+      %h3 Issue
+
+    .modal-body.auto_size_modal_body
+      
+      %input{:type=>"hidden", :value=>subject.id, :name=>:subject_id}
+      %input{:type=>"hidden", :value=>subject.class, :name=>:subject_type}
+      = f.hidden_field :assigner_id, value: current_user.id
+
+      = f.input :title, input_html: {class: 'issue_container'}
+
+      = f.input :description, input_html: {class: 'issue_container', rows: 8}
+      #issue-priority.pull-right
+        = f.input :priority, as: :radio_buttons, collection: [["High","High"], ["Normal", "Normal"], ["Low", "Low"]], include_blank: false, required: true, checked: "Normal"
+
+      = f.input :assignee_id, collection: User.all.map {|u| [u.to_s, u.id]}
+      Due Date
+      %br
+      .input-append.date.form_date
+        %input{:size => "16", :type => "text", :name => "issue[due_date]"}
+        %span.add-on
+          %i.icon-remove
+        %span.add-on
+          %i.icon-th
+      .in-between
+
+    .modal-footer
+      = f.submit(:class => "btn btn-primary")
+  

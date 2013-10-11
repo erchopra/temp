@@ -1,0 +1,22 @@
+%h1 Editing User
+= form_for @user, :url => admin_user_path(@user) do |f|
+  -if @user.errors.any?
+    #error_explination
+      %h2
+        = pluralize(@user.errors.count, "error")
+        prohibited this user from being saved:
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li = msg
+
+  = f.label :username
+  = f.text_field :username
+
+  .in-between
+
+  = f.label :email
+  = f.email_field :email
+
+  .in-between
+
+  = f.submit(:class => "btn btn-primary")

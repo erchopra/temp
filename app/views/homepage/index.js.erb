@@ -1,0 +1,4 @@
+  $('tbody#open_issues').html('<%= escape_javascript render(@open_issues) %>');
+  $('#paginator').html('<%= escape_javascript(paginate(@open_issues, :theme => 'twitter-bootstrap', :remote => true, :param_name => "open_page").to_s) %>');
+  $('tbody#closed_issues').html('<%= escape_javascript render(@closed_issues) %>');
+  $('#paginator1').html('<%= escape_javascript(paginate(@closed_issues, :theme => 'twitter-bootstrap', :remote => true, :param_name => "closed_page").to_s) %>');

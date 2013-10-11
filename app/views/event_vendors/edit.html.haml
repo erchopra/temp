@@ -1,0 +1,86 @@
+-provide :title, "Event | #{@event.pretty_id} | Vendor | #{@event_vendor.vendor.name}"
+
+%h2 #{@event.name}
+%h4 #{@event_vendor.vendor.name}
+%br
+
+= simple_form_for [@event, @event_vendor] do |f|
+  .in-between
+  = f.input :participation
+  .in-between
+  .row
+    .span2
+      = f.label "White Label Fooda"
+    .span1
+      = f.check_box :white_label_fooda
+  .in-between
+  - if @event_vendor.invoiced_line_items?
+    = f.hidden_field :menu_template_id
+    Menu Template: 
+    %b #{@event_vendor.menu_template.name}
+    %br
+    %br
+  - else
+    = f.input :menu_template_id, collection: @menu_templates.map { |a| [a.name, a.id]}, :include_blank => false, label: "Menu Template", readonly: @event_vendor.invoiced_line_items?
+  .in-between
+  = f.submit(:class => "btn btn-primary")
+
+
+.pull-right
+  %a.btn.btn-success.btn-small{:href=>new_menu_level_discount_path(:event_vendor_id => @event_vendor.id)}
+    %i.icon.icon-plus.icon-white
+    Menu Level Discount
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Min Participation
+      %th COGS
+      %th Sell Price
+      %th Actions
+  %tbody
+    %td= "-"
+    %td= number_to_currency(@event_vendor.default_menu_cogs)
+    %td= number_to_currency(@event_vendor.default_menu_sell_price)
+    %td 
+    - @event_vendor.menu_level_discounts.each do |item|
+      %tr{"data-record-id"=>item.id}
+        %td= item.min_participation
+        %td= number_to_currency(item.cogs)
+        %td= number_to_currency(item.sell_price)
+        %td
+          .btn-group
+            %a.btn.btn-mini{:href=>edit_menu_level_discount_path(item)}
+              %i.icon.icon-edit
+            %a.btn.btn-mini.btn-danger{:href=>menu_level_discount_path(item), :"data-method" => "delete", data: { confirm: 'Are you sure?' }}
+              %i.icon.icon-white.icon-remove     
+
+- if @event_vendor.menu_template.menu_template_grouped
+  %hr
+  %h3 Grouped Menu Template Configuration
+  = form_tag change_grouped_menu_template_selections_event_event_vendor_path, :method => :post do
+    - @event_vendor.menu_template.menu_template_groups_with_inventory_items.each do |mtg|
+      %table.table.table-striped
+        %thead
+          %tr
+            %th{:width => "20%"}  #{mtg.name}: Select up to #{mtg.choices_to_select}
+            %th Inventory Item Public Name
+        %tbody
+          - @event_vendor.menu_template.menu_template_inventory_items_by_group(mtg.id).each do |ii|
+            %tr
+              %td= check_box_tag("item_ids[]", value = ii.id, checked = @event.inventory_items_on_menu.include?(ii), options = {})
+              %td= ii.name_public
+    - if @event_vendor.menu_template.inventory_items_with_no_group.count > 0
+      %table.table.table-striped
+        %thead
+          %tr
+            %th{:width => "20%"} Included Items
+            %th Inventory Item Name
+        %tbody
+          - @event_vendor.menu_template.inventory_items_with_no_group.each do |ii|
+            %tr
+              %td= check_box_tag("item_ids[]", value = ii.id, checked = checked = @event.inventory_items_on_menu.include?(ii), options = {})
+              %td= ii.name_public
+    = submit_tag "Submit Changes", :class => "btn btn-primary", :disabled => @event_vendor.invoiced_line_items?
+
+= link_to 'Back to Event', @event

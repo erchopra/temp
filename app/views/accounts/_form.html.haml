@@ -1,0 +1,31 @@
+= simple_form_for @account do |f|
+  %h2 General Information
+  = f.input :name
+  = f.input :active
+  = f.input :account_type, collection: AccountType.available_values.collect{|c| [c.titleize, c]}
+  = f.input :website, :as => :url
+  = f.input :image, :as => :file
+  %hr
+  %h2 Billing Address
+  = f.simple_fields_for :address do |a|
+    .row
+      .span9
+        = a.input :name
+    .row
+      .span3
+        = a.input :address1
+      .span3
+        = a.input :address2
+    .row
+      .span3
+        = a.input :city
+      .span3
+        = a.input :state
+      .span3
+        = a.input :zip_code
+    .row
+      .span3
+        = a.input :country
+      .span3
+
+  = f.submit(:class => "btn btn-primary")

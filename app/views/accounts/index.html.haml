@@ -1,0 +1,42 @@
+-provide(:title, 'Accounts')
+.new-account-form.auto_size_modal.modal.hide.fade
+  = render :partial => "accounts/new"
+.section-header
+  %h1.center Accounts
+  %hr
+
+.create-buttons
+  %a.btn.btn-small.btn-success.toggle-modal{"data-target"=>".new-account-form"}
+    %i.icon.icon-plus-sign.icon-white{"data-target"=>".new-account-form"}
+    Account
+
+.results
+  %table.table.table-striped.table-condensed
+    %thead
+      %tr
+        %th Name
+        %th Account Manager
+        %th Account Exec
+        %th Sales Rep
+        %th 
+      = paginate @accounts, :theme => 'twitter-bootstrap'
+      - @accounts.each do |account|
+        %tr
+          %td
+            = link_to account.name, account_path(account)
+            -unless account.active
+              = " - "
+              .label.label-warning.toggle-modal Inactive
+          %td= account.account_manager
+          %td= account.account_exec
+          %td= account.sales_rep
+          %td
+            .btn-group
+              -if account.can_destroy?
+                %a.btn.btn-small.btn-danger{:href=>account_path(account), "data-method"=>"delete", "data-confirm"=>"Are you sure?"}
+                  %i.icon.icon-remove.icon-white
+              -else
+                %a.btn.btn-small.disabled
+                  %i.icon.icon-remove.icon-white
+
+  = paginate @accounts, :theme => 'twitter-bootstrap'

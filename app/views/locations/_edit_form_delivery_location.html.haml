@@ -1,0 +1,35 @@
+= simple_form_for [@account, @location] do |f|
+  %hr
+  .row-fluid
+    .span3
+      %h5 Details
+      = f.input :name, 
+        placeholder: "Location Name"
+      = f.association :contact, 
+        collection: Contact.where(account_id: @account.id), 
+        include_blank: "Contact"
+      = f.association :building, 
+        include_blank: "Building"
+    .span5
+      = render 'edit_location_address', f: f, location: @location
+  %hr
+  .row-fluid
+    .span4
+      = f.input :service_event_instructions, 
+        as: :text, 
+        input_html: {style: 'width: 90%', :rows => 5}, 
+        label: "Service Event Instructions"
+    .span4
+      = f.input :connectivity_instructions, 
+        as: :text, 
+        input_html: {style: 'width: 90%', :rows => 5}, 
+        label: "Connectivity Instructions"
+    .span4
+      = f.input :delivery_event_instructions, 
+        as: :text, 
+        :input_html => {:style=> 'width: 90%', :rows => 5}, 
+        label: "Delivery Event Instructions"
+  %hr
+  .row-fluid
+    .span2
+      = f.submit "Save Location", :class => "btn btn-primary"

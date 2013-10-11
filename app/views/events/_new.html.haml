@@ -1,0 +1,72 @@
+- @event ||= Event.new(:product => Product.catering, :meal_period => MealPeriod.lunch, :service_style => ServingStyle.drop_off)
+- @event.account = account unless defined?(account).nil?
+- @event.location = account.locations.first unless defined?(account.locations.first).nil?
+- @event.contact = account.contacts.first unless defined?(account.contacts.first).nil?
+
+- location_choices = (defined?(account.locations) ? account.locations : {})
+- contact_choices = (defined?(account.contacts) ? account.contacts : {})
+
+.modal-wrapper
+  = simple_form_for @event, remote: false do |f|
+    .modal-header
+      %button.close{:type=>"button","data-dismiss"=>"modal"}
+        &times;
+
+      %h3 New Event
+
+    .modal-body.auto_size_modal_body
+      
+      = f.association :account, include_blank: "Choose an Account", collection: Account.all.select{|a| a.active}
+
+      = f.input :location_id, as: :select, collection: location_choices, include_blank: false
+      = f.input :contact_id, as: :select, collection: contact_choices, include_blank: false
+      
+      = f.input :product, collection: Product.available_values.collect{|c| [c.titleize, c]}.sort, :include_blank => false
+      = f.input :name, :label => "Event Name"
+      = f.input :quantity, as: :integer, :label => "Account Participation"
+      = f.input :meal_period, :collection => MealPeriod.available_values.collect{|c| [c.titleize, c]}, :include_blank => false
+      = f.input :service_style, collection: ServingStyle::available_values.collect{|c| [c.titleize, c]}, :include_blank => false
+
+      .row
+        .span3
+          Event Start Time
+          %br
+          .input-append.date.form_datetime
+            %input{:size => "16", :type => "text", :name => "event[event_start_time]"}
+            %span.add-on
+              %i.icon-remove
+            %span.add-on
+              %i.icon-th
+        .span3
+          Event End Time
+          %br
+          .input-append.date.form_datetime
+            %input{:size => "16", :type => "text", :name => "event[event_end_time]"}
+            %span.add-on
+              %i.icon-remove
+            %span.add-on
+              %i.icon-th
+
+      .row
+        .span3
+          Setup Start Time
+          %br
+          .input-append.date.form_datetime
+            %input{:size => "16", :type => "text", :name => "event[setup_start_time]"}
+            %span.add-on
+              %i.icon-remove
+            %span.add-on
+              %i.icon-th
+        .span3
+          Setup End Time
+          %br
+          .input-append.date.form_datetime
+            %input{:size => "16", :type => "text", :name => "event[setup_end_time]"}
+            %span.add-on
+              %i.icon-remove
+            %span.add-on
+              %i.icon-th
+      = f.input :status, collection: Status::Event.available_values.collect{|c| [c.titleize, c]}, default: Status::Event.scheduled
+
+    .modal-footer
+      = f.submit(:class => "btn btn-primary")

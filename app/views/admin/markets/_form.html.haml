@@ -1,0 +1,21 @@
+.modal-wrapper
+  = form_for [:admin, market] do |f|
+
+    .modal-header
+      %button.close{:type=>"button","data-dismiss"=>"modal"}
+        &times;
+
+      %h3 #{title}
+
+    .modal-body
+      = f.label "Market Name"
+      .in-between
+      = f.text_field :name
+      .in-between
+      = f.label "Default Tax Rate"
+      .in-between
+      = f.text_field :default_tax_rate
+      .in-between
+
+    .modal-footer
+      = f.submit (market.id.nil? ? "Create Market" : "Save Market"), :class => "btn btn-primary"

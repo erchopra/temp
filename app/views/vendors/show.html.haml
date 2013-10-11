@@ -1,0 +1,85 @@
+-provide(:title, "Vendor | #{@vendor.pretty_id}")
+
+- content_for :head do
+  = stylesheet_link_tag "vendors"
+
+#vendor-details
+  .row-fluid
+    .span12
+      %h1.center= @vendor.name
+  .row-fluid
+    .span12
+      %b.vendor-id
+        ID: 
+        = @vendor.pretty_id
+  .row-fluid
+    .span12
+      %hr
+
+  = simple_form_for(@vendor) do |f|
+    .row-fluid
+      .span2
+        = image_tag(@vendor.image, size: "100%x100%", alt: @vendor.name)
+        %br
+        %br
+        %br
+        = f.input :image, :as => :file, label: false
+      .span8
+        %h4 Vendor Details
+        .row-fluid
+          .span4
+            = f.input :name
+            = f.input :legal_name
+            = f.input :website
+
+          .span4
+            = f.input :vendor_manager_id, :label => "Fooda Rep", collection: User.all, label_method: :username, value_method: :id
+            = f.input :default_tax_rate, as: :float, label: "Default Tax Rate (%)", :input_html => {value: number_with_precision(f.object.default_tax_rate, precision: 2)}
+            = f.input :cuisine_list, label: "Cuisines (primary first)", :input_html => {class: "select2 input-large", "data-restricted"=>true,"data-tag-source"=>"Application.data.cuisines"}
+        .row-fluid
+          .span8
+            = f.input :description, label: "Internal Notes", as: :text, input_html: {style: 'width: 90%',rows: 5}
+    .row-fluid
+      .span12
+        .pull-right
+          = f.button :submit, "Save Vendor Details", :class => "btn btn-primary"
+
+
+    %ul#section-tab-navigation.nav.nav-tabs
+      %li{class: params[:selected].nil? || params[:selected] == "products" ? 'active' : ''}
+        %a{:href=>"#products"} Products
+      %li{class: params[:selected] == "billing_address" ? 'active' : ''}
+        %a{:href=>"#billing_address"} Billing Address
+      %li{class: params[:selected] == "inventory_items" ? 'active' : ''}
+        %a{:href=>"#inventory_items"} Inventory Items
+      %li{class: params[:selected] == "menu_templates" ? 'active' : ''}
+        %a{:href=>"#menu_templates"} Menu Templates
+      %li{class: params[:selected] == "contacts" ? 'active' : ''}
+        %a{:href=>"#contacts"} Contacts
+      %li{class: params[:selected] == "events" ? 'active' : ''}
+        %a{:href=>"#events"} Events
+      %li{class: params[:selected] == "issues" ? 'active' : ''}
+        %a{:href=>"#issues"} Issues
+
+
+    #section-tabs
+      #products.section-tab{style: params[:selected].nil? || params[:selected] == "products" ? '' : 'display:none'}
+        = render :partial => "vendors/product_type_config", :locals => {vendor: @vendor}
+
+      #billing_address.section-tab{style: params[:selected] == "billing_address" ? '' : 'display:none'}
+        = render :partial => "vendors/billing_address", :locals => {vendor: @vendor}
+
+      #inventory_items.section-tab{style: params[:selected] == "inventory_items" ? '' : 'display:none'}
+        = render :partial => "vendors/inventory_items", :locals => {vendor: @vendor}
+
+      #menu_templates.section-tab{style: params[:selected] == "menu_templates" ? '' : 'display:none'}
+        = render :partial => "vendors/menu_templates", :locals => {vendor: @vendor}
+
+      #contacts.section-tab{style: params[:selected] == "contacts" ? '' : 'display:none'}
+        = render :partial => "vendors/contacts", local: {vendor: @vendor}
+
+      #events.section-tab{style: params[:selected] == "events" ? '' : 'display:none'}
+        = render :partial => "vendors/events", local: {}
+
+      #issues.section-tab{style: params[:selected] == "issues" ? '' : 'display:none'}
+        = render :partial => "issues/issues", locals: {subject: @vendor}

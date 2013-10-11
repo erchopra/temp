@@ -1,0 +1,18 @@
+- billing_reference_group = (defined? params[:searchable][:billing_reference_group]) ? params[:searchable][:billing_reference_group] : ""
+
+/ This is the biggest hack that I have every been part of... -djb
+- events = Event.search_sort_paginate(params)
+
+.row
+  .span12 
+    %h2.center Billing Reference Statement
+    %hr
+  .span12
+    = ssp_search_form Event,
+      [{ :name => :product, :as => :multi_select, :collection => Product.available_values, :nil_means_all => true},
+      { :name => :status, :as => :multi_select, :collection => Status::Event.available_values, :nil_means_all => true},
+      { :name => :billing_reference_group, :as => :select, :collection => @account.billing_reference_groups }],
+      {:meta_data => "billing_references"}
+
+= render partial: "accounts/billing_reference_report_table", locals: {billing_reference_group: billing_reference_group, events: events}
+

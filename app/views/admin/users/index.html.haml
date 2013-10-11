@@ -1,0 +1,18 @@
+-provide(:title, "User Management")
+
+
+.page-header
+  %h1.center User Management
+
+%ul
+  - @users.each_with_index do |user, index|
+    %li
+      %b
+        Username:
+      = user.username
+        
+      %br
+        %b Email:
+        = user.email
+
+    %hr 

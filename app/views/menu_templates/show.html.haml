@@ -1,0 +1,65 @@
+/ %p#notice= notice
+%p
+%p
+  %b Name:
+  = @menu_template.name
+%p
+  %b Pricing Type
+  = @menu_template.pricing_type
+%p
+  %b Product Type
+  = @menu_template.product_type
+%p
+  %b Start Date:
+  = @menu_template.start_date
+%p
+  %b Expiration Date:
+  = @menu_template.expiration_date
+
+%div{:class => (@menu_template.pricing_type == MenuPricingType.item_level) ? "hidden" : ""}
+
+  %hr
+
+  %h4 Menu-Level Pricing
+
+  %table.account-product-pricing-tier 
+    %tr 
+      %th Min Participation
+      %th COGS
+      %th Sell Price
+    %tr 
+      %td
+        = "-"
+      %td 
+        = number_to_currency(@menu_template.cogs)
+      %td 
+        = number_to_currency(@menu_template.sell_price)
+      %td 
+    - @menu_template.menu_level_discounts.each do |item|
+      %tr 
+        %td
+          = item.min_participation
+        %td 
+          = number_to_currency(item.cogs)
+        %td 
+          = number_to_currency(item.sell_price)
+
+%hr
+
+%h4 Inventory Items
+
+= form_tag change_inventory_items_vendor_menu_template_path, :method => :post do
+  - @available_items.each do |item|
+    = check_box_tag("item_ids[]", value = item.id, checked = @menu_template.inventory_items.include?(item), options = {})
+    = link_to item.name, vendor_inventory_item_path(@vendor, item)
+    = link_to "Edit", edit_vendor_inventory_item_path(@vendor, item)
+    %br
+  %br   
+  = submit_tag "Submit Changes", :class => "btn btn-primary"
+
+%br
+%br
+
+= link_to 'Edit', edit_vendor_menu_template_path(@menu_template)
+|
+\#{link_to 'Back to Vendor', @vendor}

@@ -1,0 +1,8 @@
+-provide :title, "Account | #{@account.pretty_id}} |Location"
+.locations.row-fluid.span12
+  - if @location.location_type == LocationType.spot
+    %h2 Edit Spot Location
+    =render 'edit_form_spot_location'
+  - elsif @location.location_type == LocationType.delivery
+    %h2 Edit Delivery Location
+    =render 'edit_form_delivery_location'

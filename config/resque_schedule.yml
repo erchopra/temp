@@ -1,0 +1,28 @@
+catering_schedule_preview:
+  cron: 00 21 * * 1-5 
+  class: CateringSchedulePreview
+  args:      
+    - "Automated"
+    - "snappea@fooda.com"
+    - "4:00 Scheduled"
+  description: 4:00pm preview of tomorrow's catering schedule
+
+end_of_day_sales_report:
+  cron: 00 21 * * 1-5 
+  class: EndOfDaySalesReport
+  args:
+    - "Automated"
+    - "snappea@fooda.com"
+    - "4:00 Scheduled"
+  description: 4:00pm report on the catering sales made today
+
+# vendor_billing_summaries:
+#   cron: 00 20 * * 1-5 
+#   class: VendorBillingSummaries
+#   args:
+#     - "Automated"
+#     - "accounting@fooda.com"
+#     - "3:00 Scheduled"
+#     - Time.now.to_i
+#     - false    
+#   description: 3:00pm report on the active vendors today

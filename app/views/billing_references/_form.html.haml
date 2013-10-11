@@ -1,0 +1,19 @@
+- reference ||= BillingReference.new
+
+.modal-wrapper
+  .modal-header
+    %button.close{:type=>"button","data-dismiss"=>"modal"}
+      &times;
+
+    %h3 Billing Reference
+
+  = simple_form_for [@account, reference] do |f|
+    .modal-body
+      .in-between
+      = f.input :name
+      .in-between
+      = f.input :tag_list, label: "Choices", :input_html => {class: "select2 input-large", "data-restricted"=>false}
+
+    .modal-footer
+      = f.submit (reference.id.nil? ? "Create Billing Reference" : "Save Billing Reference"), :class => "btn btn-primary"
+  
